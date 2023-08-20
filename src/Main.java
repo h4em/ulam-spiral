@@ -1,13 +1,14 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+
 public class Main extends JFrame {
     private boolean[] primes = sieveOfEratosthenes();
     private final int primeBound = 1080 * 10 * 1080 * 10;
     public Main() {
         setTitle("Ulam spiral");
-        setSize(new Dimension(640, 360));
-        setMinimumSize(new Dimension(640, 360));
+        setSize(new Dimension(640, 640));
+        setMinimumSize(new Dimension(640, 640));
         setMaximumSize(new Dimension(1920, 1080));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addComponentListener( new ComponentAdapter() {
@@ -17,6 +18,7 @@ public class Main extends JFrame {
             }
         });
 
+        centerOnScreen();
         setVisible(true);
     }
 
@@ -88,6 +90,13 @@ public class Main extends JFrame {
         }
 
         return primes;
+    }
+
+    private void centerOnScreen() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int centerX = (screenSize.width - this.getWidth()) / 2;
+        int centerY = (screenSize.height - this.getHeight()) / 2;
+        setLocation(centerX, centerY - 30);
     }
 
     public static void main(String args[]) {
